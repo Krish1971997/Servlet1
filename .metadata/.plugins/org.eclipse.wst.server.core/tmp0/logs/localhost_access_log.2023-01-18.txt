@@ -1,0 +1,8 @@
+127.0.0.1 - - [18/Jan/2023:18:16:36 +0530] "GET / HTTP/1.1" 404 751
+0:0:0:0:0:0:0:1 - - [18/Jan/2023:18:16:43 +0530] "GET /my-first-jsp-project/my-first-jsp-file.jsp HTTP/1.1" 200 272
+0:0:0:0:0:0:0:1 - - [18/Jan/2023:18:16:43 +0530] "GET /favicon.ico HTTP/1.1" 404 762
+0:0:0:0:0:0:0:1 - - [18/Jan/2023:18:16:49 +0530] "GET /my-first-jsp-project/my-first-jsp-file.jsp HTTP/1.1" 200 272
+0:0:0:0:0:0:0:1 - - [18/Jan/2023:18:16:51 +0530] "GET /my-first-jsp-project/my-first-jsp-file.jsp HTTP/1.1" 200 272
+127.0.0.1 - - [18/Jan/2023:18:46:03 +0530] "GET / HTTP/1.1" 404 751
+0:0:0:0:0:0:0:1 - - [18/Jan/2023:18:46:24 +0530] "GET /my-first-jsp-project/second HTTP/1.1" 200 257
+0:0:0:0:0:0:0:1 - - [18/Jan/2023:18:46:54 +0530] "GET /my-first-jsp-project/second HTTP/1.1" 200 278

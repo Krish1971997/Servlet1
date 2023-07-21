@@ -1,0 +1,54 @@
+package com.zoho.BusBookingUsingExcel;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+
+import busBookingSystem.Customers;
+
+enum BookingType {
+	SEATER, SLEEPER
+};
+
+public class ImportApp {
+	public static void main(String[] args) throws IOException {
+		/*
+		 * importExcel(); } 
+		 * 
+		 * public static void importExcel() throws IOException {
+		 */
+		String file = "C:\\Users\\Admin\\Documents\\BusbookingExcelsheet.xls";
+		Customers customers = new Customers();
+		try {
+			FileInputStream fileinput = new FileInputStream(new File(file));
+			HSSFWorkbook hssf = new HSSFWorkbook(fileinput);
+			HSSFSheet sheet = hssf.getSheetAt(0);
+			for (Row row : sheet) {
+				Cell n1Cell = row.getCell(0);
+				customers.setName(n1Cell.toString());
+				Cell n2Cell = row.getCell(1);
+				customers.setAge((int)n2Cell.getNumericCellValue());
+				Cell n3Cell = row.getCell(2);
+				customers.setGender(n3Cell.toString());
+				Cell n4Cell = row.getCell(3);
+				customers.setType(BookingType.valueOf(n4Cell.toString()));
+				Cell n1Cell = row.getCell(4);
+				String cell1 = n1Cell.toString();
+				Cell n1Cell = row.getCell(5);
+				String cell1 = n1Cell.toString();
+				Cell n1Cell = row.getCell(6);
+				String cell1 = n1Cell.toString();
+				Cell n1Cell = row.getCell(7);
+				String cell1 = n1Cell.toString();
+				System.out.println("Cell --- > " + n1Cell);
+			}
+		} catch (Exception e) {
+			System.out.println("Exception occured");
+		}
+	}
+}

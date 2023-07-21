@@ -1,0 +1,13 @@
+package com.zoho.BusBookingUsingExcel;
+
+import java.io.File;
+import java.io.FileInputStream;
+
+public class ImportApp 
+{
+
+	public static void importExcel() {
+		FileInputStream fileinput=new FileInputStream(new File("C:\\Users\\Admin\\Documents\\BusbookingExcel.xlsx"));
+	}
+    
+}

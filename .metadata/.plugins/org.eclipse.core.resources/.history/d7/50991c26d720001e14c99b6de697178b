@@ -1,0 +1,22 @@
+package com.test.quizapp.model;
+
+import org.hibernate.annotations.Table;
+
+import jakarta.persistence.Entity;
+import lombok.Data;
+
+@Data
+@Table(name = "Questions")
+@Entity
+public class Questions {
+	
+	private int id;
+	private String questionTitle;
+	private String option1;
+	private String option2;
+	private String option3;
+	private String option4;
+	private String rightAnswer;
+	private String difficultylevel;
+
+}

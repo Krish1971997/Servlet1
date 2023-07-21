@@ -1,0 +1,16 @@
+package com.test.quizapp.dao;
+
+import java.util.List;
+
+import org.springframework.stereotype.Repository;
+
+import com.test.quizapp.model.Question;
+
+@Repository
+public class QuestionDao {
+
+	public List<Question> getAllQuestions() {
+		return null;
+	}
+
+}

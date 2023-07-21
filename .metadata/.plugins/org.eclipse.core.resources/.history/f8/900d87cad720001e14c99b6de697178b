@@ -1,0 +1,5 @@
+package com.test.quizapp.dao;
+
+public class QuestionDao {
+
+}

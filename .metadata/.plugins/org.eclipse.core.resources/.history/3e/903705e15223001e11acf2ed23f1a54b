@@ -1,0 +1,46 @@
+package com.zoho.BusBookingUsingExcel;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.xssf.usermodel.XSSFCell;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
+public class ImportApp 
+{
+	public static void main(String[] args) throws IOException {
+	/*	importExcel();
+	}
+	public static void importExcel() throws IOException {
+	*/	
+		int n1ColIndex = 0; 
+		String file="C:\\Users\\Admin\\Documents\\BusbookingExcelsheet.xls";
+		try {
+			FileInputStream fileinput=new FileInputStream(new File(file));
+			XSSFWorkbook hssf=new XSSFWorkbook(fileinput);
+			XSSFSheet sheet=hssf.getSheetAt(0);
+			for(Row row: sheet)  {
+				Cell n1Cell = row.getCell(n1ColIndex);
+				
+				
+				
+				
+				Row rowindex=sheet.getRow(1);
+				for(Cell cell: row) {
+					Cell cellindex=row.getCell(1);
+					System.out.println("RowIndex --> "+rowindex);
+					System.out.println("CellIndex --> "+cellindex);
+				}
+			} 
+		} catch (Exception e) {
+			System.out.println("Exception occured");
+			
+		}
+		
+	}
+    
+}

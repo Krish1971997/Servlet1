@@ -1,0 +1,135 @@
+package com.zoho.BusBookingUsingExcel;
+
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.net.UnknownHostException;
+import java.nio.file.Files;
+
+import org.apache.commons.net.ftp.FTP;
+import org.apache.commons.net.ftp.FTPClient;
+import org.apache.commons.net.ftp.FTPFile;
+import org.apache.commons.net.ftp.FTPReply;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import busBookingSystem.BookingTicket;
+
+class FtpConnector {
+
+	Logger logger
+		= LoggerFactory.getLogger(FtpConnector.class);
+
+	public FTPClient connect() throws IOException
+	{
+		// Create an instance of FTPClient
+		FTPClient ftpClient = new FTPClient();
+		try {
+			// establish a connection with specific host and
+			// port.
+			ftpClient.connect("localhost", 21);
+
+			int replyCode = ftpClient.getReplyCode();
+			if (!FTPReply.isPositiveCompletion(replyCode)) {
+				logger.info(
+					"Operation failed. Server reply code: "
+					+ replyCode);
+				ftpClient.disconnect();
+			}
+
+			// login to ftp server with username and
+			// password.
+			boolean success
+				= ftpClient.login("testuser1", "1234");
+			if (!success) {
+				ftpClient.disconnect();
+			}
+			// assign file type according to the server.
+			ftpClient.setFileType(FTP.BINARY_FILE_TYPE);
+			ftpClient.enterLocalPassiveMode();
+
+			// change specific directory of ftp server from
+			// you want to download files.
+			boolean changedRemoteDir
+				= ftpClient.changeWorkingDirectory(
+					"/New directory");
+			if (!changedRemoteDir) {
+				logger.info("Remote directory not found.");
+			}
+		}
+		catch (UnknownHostException E) {
+			logger.info("No such ftp server");
+		}
+		catch (IOException e) {
+			logger.info(e.getMessage());
+		}
+		return ftpClient;
+	}
+}
+
+public class FtpDownloader {
+	static Logger logger
+		= LoggerFactory.getLogger(FtpDownloader.class);
+
+	public static void main(String[] args)
+		throws IOException
+	{
+
+		// create a instance of FtpConnector
+		FtpConnector ftpConnector = new FtpConnector();
+
+		// get ftp client object.
+		FTPClient ftpClient = ftpConnector.connect();
+
+		// list all the files which will be downloaded.
+		FTPFile[] ftpFiles = ftpClient.listFiles();
+
+		// set downloading dir where all the files will be
+		// stored on local directory.
+		String downloading_dir
+			= "D:/FTP Test/";
+
+		for (FTPFile file : ftpFiles) {
+			File fileObj = new File(downloading_dir
+									+ file.getName());
+			Files.createFile(fileObj.toPath());
+			try (OutputStream outputStream
+				= new BufferedOutputStream(
+					new FileOutputStream(fileObj))) {
+				
+				// ftpclient.retrieveFile will get the file
+				// from Ftp server and write it in
+				// outputStream.
+				boolean isFileRetrieve
+					= ftpClient.retrieveFile(file.getName(),
+											outputStream);
+				logger.info("{} file is downloaded : {}",
+							file.getName(), isFileRetrieve);
+				outputStream.close();
+				BookingTicket.importExcel(fileObj);
+				System.out.println("File  -->"+fileObj);
+				System.out.println("Read -->" +fileObj.canRead());
+				System.out.println("Write -->" +fileObj.canWrite());
+				File file1 = new File(downloading_dir
+						+ file.getName());
+				System.out.println("File1 ---> "+file1);
+				if(file1.exists()) {
+					if(file1.delete()){
+						System.out.println(fileObj.getName()+" deleted");	
+					}else
+						System.err.println(
+						        "I cannot find '" + file1 + "' ('" + file1.getAbsolutePath() + "')");
+					
+				}
+				else {
+					System.out.println(fileObj.getName()+" not deleted");
+					System.err.println(
+					        "I cannot find '" + file1 + "' ('" + file1.getAbsolutePath() + "')");
+				}
+			}
+		}
+	}
+}
+

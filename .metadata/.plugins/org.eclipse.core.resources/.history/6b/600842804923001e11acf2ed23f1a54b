@@ -1,0 +1,18 @@
+package com.zoho.BusBookingUsingExcel;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+
+public class ImportApp 
+{
+
+	public static void importExcel() throws FileNotFoundException {
+		FileInputStream fileinput=new FileInputStream(new File("C:\\Users\\Admin\\Documents\\BusbookingExcel.xlsx"));
+		HSSFWorkbook hssf=new HSSFWorkbook(fileinput);
+		
+	}
+    
+}

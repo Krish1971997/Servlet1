@@ -1,0 +1,5 @@
+INDEX VERSION 1.134
+C:\Users\Admin\Documents\eclipse-workspace\eclipse-workspace\Servelet1-workspace\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\1542693483.index
+\my-first-jsp-project\src\main\java
+C:\Users\Admin\Documents\eclipse-workspace\eclipse-workspace\Servelet1-workspace\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\2042532426.index
+\my-first-jsp-project\src\main\java
